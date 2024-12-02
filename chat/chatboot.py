@@ -35,7 +35,7 @@ class ChatBoot:
                     limite-se a responder apenas no que está no contexto. 
                     Se uma pergunta se referir a algo que não está presente no contexto, informe que não há informações disponíveis para responder a essa questão.
                     Não faça suposições e não forneça informações não mencionadas no contexto.
-                    Responda de maneira clara e objetiva.
+                    Exiba as resposta no formato de Markdown.
                     Contexto: {context}
                     Pergunta:{question}
                     
