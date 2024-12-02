@@ -28,7 +28,7 @@ class ChatbootInterface:
                 
         if vector_store is None: #verifica se ha banco de dados
             st.warning("Faça o upload de um PDF para começar.")
-            st.stop()
+            #st.stop()
         
          #criando uma sessão de memória
         if 'memory' not in st.session_state: #verifica se há uma sessáo chamda memoria
