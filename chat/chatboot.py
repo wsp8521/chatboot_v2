@@ -9,11 +9,9 @@ from langchain.chains.retrieval_qa.base import RetrievalQA
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-
 #Classes que permitem configurar as respostas da llm em forma de streaming
 from langchain.callbacks.base import BaseCallbackManager
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
-
 
 
 os.environ['OPENAI_API_KEY'] = os.getenv('TOKEN_OPENAI')
@@ -42,7 +40,6 @@ class ChatBoot:
                     
                     '''
         )
-       
        
         model = ChatGroq(model='llama-3.2-90b-vision-preview', api_key=os.getenv('TOKEN_GROQ'), streaming=True, callback_manager=callback_manager)
         chat = RetrievalQA.from_chain_type(
@@ -88,7 +85,7 @@ class ChatBoot:
             return None
         
                     
-    #PROCESSOS DE RAGS
+    #PROCESSOS DE RAGS==============================================================
         
     #lendo arquivo    
     def __load_file(self, file):    

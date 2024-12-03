@@ -1,2 +1,6 @@
 venv
 db
+.env
+2.chunks.py
+3.embedding_e_vector_store.py
+4.chat.py
