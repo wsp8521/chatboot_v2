@@ -1,14 +1,28 @@
-MODEL = {
-    'Groq':{
-        'modelos':['llama-3.2-90b-vision-preview','llama-3.1-70b-versatile','gemma2-9b-it']
-        },
-    'Openai':{
-        'modelos':['gpt-4o-mini','gpt-3.5-turbo-0125']
-        }
-    }
+from openai import OpenAI
+import os
+import pygame  # Biblioteca para reproduzir áudio
 
+# Configuração da chave da API
+os.environ['OPENAI_API_KEY'] = os.getenv('TOKEN_OPENAI')
 
-provedor = list(MODEL.keys())[0]
-modelos = MODEL[provedor]['modelos']
-print(provedor)
-print(modelos)
+# Inicializa o cliente da OpenAI
+cliente = OpenAI()
+response = cliente.audio.speech.create(
+    model='tts-1',
+    voice='onyx', #tipo de voz: onyx, alloy, echo, fable, nova, shimmer
+    input="onde fica essa casas"
+)
+
+# Salva o arquivo de áudio gerado
+response.write_to_file('response.mp3')
+
+# Inicializa o mixer do pygame para reprodução de áudio
+pygame.mixer.init()
+
+# Carrega e reproduz o arquivo de áudio
+pygame.mixer.music.load('response.mp3')
+pygame.mixer.music.play()
+
+# Aguarda o fim da reprodução do áudio
+while pygame.mixer.music.get_busy():  # Enquanto o áudio estiver tocando
+    pygame.time.Clock().tick(10)

@@ -12,7 +12,8 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 #Classes que permitem configurar as respostas da llm em forma de streaming
 from langchain.callbacks.base import BaseCallbackManager
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
-
+from dotenv import load_dotenv
+load_dotenv()
 
 os.environ['OPENAI_API_KEY'] = os.getenv('TOKEN_OPENAI')
 
@@ -20,7 +21,7 @@ class ChatBoot:
     def __init__(self, model):
         self.temp_file_path = None
         self.vector_store_db_name = 'db'
-        self.model = model,
+        self.model = model
         self.memory = ConversationBufferMemory(return_messages=True, memory_key='history', output_key='result')
         
      #método chat   
@@ -41,7 +42,7 @@ class ChatBoot:
                     '''
         )
        
-        model = ChatGroq(model='llama-3.2-90b-vision-preview', api_key=os.getenv('TOKEN_GROQ'), streaming=True, callback_manager=callback_manager)
+        model = self.model #ChatGroq(model='llama-3.2-90b-vision-preview', api_key=os.getenv('TOKEN_GROQ'), streaming=True, callback_manager=callback_manager)
         chat = RetrievalQA.from_chain_type(
             llm = model,
             memory = self.memory,
@@ -56,6 +57,7 @@ class ChatBoot:
     #memoria do chat
     def memory_chat(self):
         return self.memory
+    
 
     #lendo vector_store existente
     def load_vector_store(self):
@@ -119,7 +121,7 @@ class ChatBoot:
         else:
            vector_store = Chroma.from_documents( #criando vector_store
                documents=chunks,
-               embedding=OpenAIEmbeddings(),
+               embedding=OpenAIEmbeddings(api_key=os.getenv('TOKEN_OPENAI')),
                persist_directory=self.vector_store_db_name   
            ) 
         
