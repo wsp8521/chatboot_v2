@@ -36,9 +36,7 @@ class ChatBoot:
                     Não faça suposições e não forneça informações não mencionadas no contexto.
                     Exiba as resposta no formato de Markdown.
                     Contexto: {context}
-                    Pergunta:{question}
-                    
-                    
+                    Pergunta:{question} 
                     '''
         )
        
